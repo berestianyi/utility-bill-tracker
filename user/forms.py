@@ -5,23 +5,60 @@ from user.models import User
 
 
 class UserLoginForm(AuthenticationForm):
-    email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': "Enter your email"}))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': "Enter your password"}))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={
+        'placeholder': "name@example.com",
+        'type': "email",
+        'id': "floatingInput",
+    }))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={
+        'placeholder': "Password",
+        'type': "password",
+        'id': "floatingPassword",
+    }))
 
     class Meta:
         model = User
         fields = ('email', 'password')
 
+    def __init__(self, *args, **kwargs):
+        super(UserLoginForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control border-primary'
+            field.widget.attrs['style'] = 'background-color: #222049; color: #ececec;'
+
 
 class UserRegistrationForm(UserCreationForm):
-    username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': "Enter your username"}))
-    email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': "Enter your email"}))
-    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': "Create password"}))
-    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': "Repeat password"}))
+    username = forms.CharField(widget=forms.TextInput(attrs={
+        'placeholder': "Enter your username",
+        'id': "floatingInput",
+        'type': "text",
+
+    }))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={
+        'placeholder': "name@example.com",
+        'type': "email",
+        'id': "floatingInput",
+    }))
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={
+        'placeholder': "Password",
+        'type': "password",
+        'id': "floatingPassword",
+    }))
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={
+        'placeholder': "Password",
+        'type': "password",
+        'id': "floatingPassword",
+    }))
 
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2')
+
+    def __init__(self, *args, **kwargs):
+        super(UserRegistrationForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control border-success'
+            field.widget.attrs['style'] = 'background-color: #0b3817; color: #ececec;'
 
 
 class UserProfileChangeForm(UserChangeForm):
