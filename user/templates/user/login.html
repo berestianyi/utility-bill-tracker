@@ -9,17 +9,20 @@
         <div class="card w-75 border-primary mb-3" style="max-width: 30rem; height: 17rem; background-color: #222049; color: #3563ff;">
             <div class="card-header bg-transparent border-primary">Sign in</div>
             <div class="card-body text-primary">
-                <form class="text-end">
+                <form action="{% url 'user:login' %}" method="post" class="text-end">
+                    {% csrf_token %}
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control border-primary" id="floatingInput" placeholder="name@example.com" style="background-color: #222049; color: #ececec;">
+                        {{ form.email }}
+{#                        <input type="email" class="form-control border-primary" id="floatingInput" placeholder="name@example.com" style="background-color: #222049; color: #ececec;">#}
                         <label for="floatingInput">Email address</label>
                     </div>
                     <div class="form-floating">
-                        <input type="password" class="form-control border-primary" id="floatingPassword" placeholder="Password" style="background-color: #222049; color: #ececec;">
+                        {{ form.password }}
+{#                        <input type="password" class="form-control border-primary" id="floatingPassword" placeholder="Password" style="background-color: #222049; color: #ececec;">#}
                         <label for="floatingPassword">Password</label>
                     </div>
                     <div class="d-flex row justify-content-between" style="margin: 0.9rem 0 0.9rem ">
-                        <div class="d-flex form-check justify-content-start" style="max-width: 15rem; margin-top: 0.5rem">
+                        <div class="d-flex form-check justify-content-start" style="max-width: 12rem; margin-top: 0.5rem">
                               <input class="form-check-input border-primary" type="checkbox" value="" id="flexCheckChecked" checked style="margin-right: 1rem; background-color: #222049;">
                               <label class="form-check-label" for="flexCheckChecked">
                                 Stay signed in

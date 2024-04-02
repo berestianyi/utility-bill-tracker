@@ -6,20 +6,29 @@
 
 {% block body %}
     <div class="d-flex justify-content-center align-items-center" style="height: 60vh;">
-        <div class="card w-75 border-success mb-3 text-success" style="max-width: 30rem; height: 21rem; background-color: #0b3817;">
+        <div class="card w-75 border-success mb-3 text-success" style="max-width: 30rem; height: 25.2rem; background-color: #0b3817;">
             <div class="card-header bg-transparent border-success">Sign up</div>
             <div class="card-body text-primary">
-                <form class="text-end">
+                <form action="{% url 'user:login' %}" method="post" class="text-end">
+                    {% csrf_token %}
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control border-success" id="floatingInput" placeholder="name@example.com" style="background-color: #0b3817; color: #ececec;">
+                        {{ form.username }}
+{#                        <input type="text" class="form-control border-success" id="floatingInput" placeholder="username" style="background-color: #0b3817; color: #ececec;">#}
+                        <label for="floatingInput" class="text-success">Username</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        {{ form.email }}
+{#                        <input type="email" class="form-control border-success" id="floatingInput" placeholder="name@example.com" style="background-color: #0b3817; color: #ececec;">#}
                         <label for="floatingInput" class="text-success">Email address</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control border-success" id="floatingPassword" placeholder="Password" style="background-color: #0b3817; color: #ececec;">
+                        {{ form.password1 }}
+{#                        <input type="password" class="form-control border-success" id="floatingPassword" placeholder="Password" style="background-color: #0b3817; color: #ececec;">#}
                         <label for="floatingPassword" class="text-success">Password</label>
                     </div>
                     <div class="form-floating">
-                        <input type="password" class="form-control border-success" id="floatingPassword" placeholder="Password" style="background-color: #0b3817; color: #ececec;">
+                        {{ form.password2 }}
+{#                        <input type="password" class="form-control border-success" id="floatingPassword" placeholder="Password" style="background-color: #0b3817; color: #ececec;">#}
                         <label for="floatingPassword" class="text-success"> Repeat password</label>
                     </div>
                     <div class="d-flex row justify-content-between" style="margin: 0.9rem 0 0.9rem ">
