@@ -62,8 +62,19 @@ class UserRegistrationForm(UserCreationForm):
 
 
 class UserProfileChangeForm(UserChangeForm):
-    username = forms.CharField(widget=forms.TextInput(attrs={'readonly': True}))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={
+        'readonly': True,
+        'placeholder': "name@example.com",
+        'type': "email",
+        'id': "floatingInput",
+    }))
 
     class Meta:
         model = User
         fields = ('username', 'email')
+
+    def __init__(self, *args, **kwargs):
+        super(UserProfileChangeForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control border-info'
+            field.widget.attrs['style'] = 'background-color: #1b4757; color: #ececec;'

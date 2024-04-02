@@ -2,9 +2,18 @@
 {% load static %}
 
 
-{% block title %}Login{% endblock %}
+{% block title %}Sign Up{% endblock %}
 
 {% block body %}
+    <div class="d-flex justify-content-center align-items-center" style="margin-top: 6rem">
+    {% if form.errors %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert" style="max-width: 30rem; height: auto;">
+          {{ form.errors}}
+{#                <strong>Holy guacamole!</strong> You should check in on some of those fields below.#}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
+    </div>
     <div class="d-flex justify-content-center align-items-center" style="height: 60vh;">
         <div class="card w-75 border-success mb-3 text-success" style="max-width: 30rem; height: 25.2rem; background-color: #0b3817;">
             <div class="card-header bg-transparent border-success">Sign up</div>
@@ -33,7 +42,7 @@
                     </div>
                     <div class="d-flex row justify-content-between" style="margin: 0.9rem 0 0.9rem ">
                         <button type="submit" class="btn btn-success border-success" style="max-width: 12rem;">Login with Google</button>
-                        <button type="submit" class="btn btn-success border-success" style="max-width: 10rem;">Sign up</button>
+                        <button type="submit" class="btn btn-success border-success" style="max-width: 9rem;">Sign up</button>
                     </div>
                 </form>
             </div>
