@@ -28,7 +28,7 @@ def registration(request):
         form = UserRegistrationForm(data=request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('users:login'))
+            return HttpResponseRedirect(reverse('user:login'))
     else:
         form = UserRegistrationForm()
     context = {'form': form}
@@ -40,7 +40,7 @@ def profile_change(request):
         form = UserProfileChangeForm(data=request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('users:profile'))
+            return HttpResponseRedirect(reverse('user:profile'))
     else:
         form = UserProfileChangeForm(instance=request.user)
     context = {'form': form}
