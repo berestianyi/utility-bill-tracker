@@ -6,33 +6,36 @@
 
 {% block body %}
     <div class="container-fluid">
-        <div class="d-flex row justify-content-center" style="margin-top: 9rem">
-            <div class="card text-bg-primary m-3" style="max-width: 18rem;">
-                  <div class="card-header">Kyiv, Salutna 2</div>
+        <div class="d-flex row justify-content-center" style="margin-top: 6rem">
+            <div style="margin-left: 2rem;">
+                <a href="{% url 'bills:add_bill' %}" style="color: #ececec; text-decoration: none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-plus-circle" viewBox="0 0 16 16" style="margin-bottom: 0.3rem">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                    </svg>
+                    Add new address
+                </a>
+            </div>
+            <div class="card border-light m-3" style="max-width: 18rem; background-color: #1b1d1e; color: #ececec">
+                  <div class="card-header border-light">Kyiv, salutna 2</div>
                   <div class="card-body">
-                      <h5 class="card-title">Primary card title</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <h5 class="card-title">Light card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                   </div>
             </div>
-            <div class="card text-bg-primary m-3" style="max-width: 18rem;">
-                  <div class="card-header">Header</div>
+            <div class="card border-light m-3" style="max-width: 18rem; background-color: #1b1d1e; color: #ececec">
+                  <div class="card-header border-light">Header</div>
                   <div class="card-body">
-                      <h5 class="card-title">Primary card title</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <h5 class="card-title">Light card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                   </div>
             </div>
-            <div class="card text-bg-primary m-3" style="max-width: 18rem;">
-                  <div class="card-header">Header</div>
+            <div class="card border-light m-3" style="max-width: 18rem; background-color: #1b1d1e; color: #ececec">
+                  <div class="card-header border-light">Header</div>
                   <div class="card-body">
-                      <h5 class="card-title">Primary card title</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <h5 class="card-title">Light card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                   </div>
-            </div>
-            <div class="d-flex row justify-content-end">
-                <a class="" style="color: #ececec">Add new address</a>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
-                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/>
-                </svg>
             </div>
         </div>
     </div>
