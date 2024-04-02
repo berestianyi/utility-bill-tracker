@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from bills.models import Bill, BillCategory, Building
+
+admin.site.register(Building)
+admin.site.register(BillCategory)
+admin.site.register(Bill)
