@@ -1,0 +1,29 @@
+@font-face {
+  font-family:'RussoOne';
+  src: url("/bills/static/bills/fonts/RussoOne-Regular.ttf");
+}
+
+.navbar-brand {
+  font-family: 'RussoOne', sans-serif;
+  font-weight: bolder;
+  font-size: 30px;
+  color: #000000;
+}
+
+.navbar-brand:hover {
+	color: #2b5f7c;
+}
+
+.navbar-scroll .nav-link,
+.navbar-scroll .fa-bars {
+  color: #000000;
+}
+
+.navbar-scrolled .nav-link,
+.navbar-scrolled .fa-bars {
+  color: #2b5f7c;
+}
+
+.navbar-scrolled {
+  background-color: #f6f6f6;
+}
