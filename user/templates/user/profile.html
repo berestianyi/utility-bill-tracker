@@ -1,10 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html'%}
+{% load static %}
 
-</body>
-</html>
+
+{% block title %}Profile{% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-center align-items-center" style="height: 60vh;">
+        <div class="card w-75 border-info mb-3" style="max-width: 30rem; height: 17rem; background-color: #1b4757; color: aqua;">
+            <div class="card-header bg-transparent border-info">Profile</div>
+            <div class="card-body text-primary">
+                <form action="{% url 'user:profile' %}" method="post" class="text-end">
+                    {% csrf_token %}
+                    <div class="form-floating mb-3">
+                        {{ form.username }}
+{#                        <input type="text" class="form-control border-info" id="floatingInput" placeholder="name@example.com" style="background-color: #1b4757; color: #ececec;">#}
+                        <label for="floatingInput" style="color: aqua">Username</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        {{ form.email }}
+{#                        <input type="email" class="form-control border-info" id="floatingInput" placeholder="name@example.com" style="background-color: #1b4757; color: #ececec;">#}
+                        <label for="floatingInput" style="color: aqua">Email address</label>
+                    </div>
+                    <div class="d-flex row justify-content-between" style="margin: 0.9rem 0 0.9rem">
+                        <button type="submit" class="btn btn-outline-info" style="max-width: 11rem; color: aqua;">Change Username</button>
+                        <a href="{% url 'user:logout' %}" class="btn btn-danger border-danger" style="max-width: 10rem;">Log Out</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
