@@ -5,9 +5,9 @@ from user.models import User
 
 
 class UserLoginForm(AuthenticationForm):
-    email = forms.EmailField(widget=forms.EmailInput(attrs={
-        'placeholder': "name@example.com",
-        'type': "email",
+    username = forms.CharField(widget=forms.TextInput(attrs={
+        'placeholder': "Enter your username",
+        'type': "text",
         'id': "floatingInput",
     }))
     password = forms.CharField(widget=forms.PasswordInput(attrs={
@@ -18,7 +18,7 @@ class UserLoginForm(AuthenticationForm):
 
     class Meta:
         model = User
-        fields = ('email', 'password')
+        fields = ('username', 'password')
 
     def __init__(self, *args, **kwargs):
         super(UserLoginForm, self).__init__(*args, **kwargs)
