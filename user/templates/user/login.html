@@ -7,23 +7,23 @@
 {% block body %}
     <div class="d-flex justify-content-center align-items-center" style="margin-top: 6rem">
         {% if form.errors %}
-            <div class="alert alert-warning alert-dismissible fade show" role="alert" style="max-width: 30rem; height: auto;">
-              {{ form.errors}}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="max-width: 30rem; height: auto;">
+              {{ form.non_field_errors }}
 {#                <strong>Holy guacamole!</strong> You should check in on some of those fields below.#}
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         {% endif %}
     </div>
-    <div class="d-flex justify-content-center align-items-top" style="height: 60vh;">
+    <div class="d-flex justify-content-center align-items-top mt-5" style="height: 60vh;">
         <div class="card w-75 border-primary mb-3 col-4" style="max-width: 30rem; height: 17rem; background-color: #222049; color: #3563ff;">
             <div class="card-header bg-transparent border-primary">Sign in</div>
             <div class="card-body text-primary">
                 <form action="{% url 'user:login' %}" method="post" class="text-end">
                     {% csrf_token %}
                     <div class="form-floating mb-3">
-                        {{ form.email }}
+                        {{ form.username }}
 {#                        <input type="email" class="form-control border-primary" id="floatingInput" placeholder="name@example.com" style="background-color: #222049; color: #ececec;">#}
-                        <label for="floatingInput">Email address</label>
+                        <label for="floatingInput">Username</label>
                     </div>
                     <div class="form-floating">
                         {{ form.password }}
