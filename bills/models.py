@@ -19,6 +19,7 @@ class Building(models.Model):
 class BillCategory(models.Model):
     name = models.CharField(max_length=50)
     color = models.CharField(max_length=30, default='Red')
+    is_selected = models.BooleanField(default=True)
     slug = models.SlugField(unique=True, max_length=255, db_index=True)
 
     objects = models.Manager()
