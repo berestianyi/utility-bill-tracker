@@ -5,22 +5,10 @@ from django.db import models
 from user.models import User
 
 
-class Building(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    address = models.CharField(max_length=50)
-    home_mark = models.BooleanField(default=False)
-
-    objects = models.Manager()
-
-    def __str__(self):
-        return self.address
-
-
 class BillCategory(models.Model):
     name = models.CharField(max_length=50)
     color = models.CharField(max_length=30, default='Red')
     is_selected = models.BooleanField(default=True)
-    slug = models.SlugField(unique=True, max_length=255, db_index=True)
 
     objects = models.Manager()
 
@@ -38,8 +26,21 @@ class BillSubCategory(models.Model):
         return self.name
 
 
+class Building(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='buildings')
+    bill_sub_category = models.ManyToManyField(BillSubCategory, related_name='buildings', blank=True)
+    name = models.CharField(max_length=50)
+    address = models.CharField(max_length=50)
+    home_mark = models.BooleanField(default=False)
+
+    objects = models.Manager()
+
+    def __str__(self):
+        return self.address
+
+
 class Bill(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    building = models.ForeignKey(Building, on_delete=models.CASCADE)
     name = models.ForeignKey(BillSubCategory, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=20, decimal_places=3)
     measure_unit = models.CharField(max_length=10, default='watt-hour')
