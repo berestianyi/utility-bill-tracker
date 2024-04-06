@@ -18,7 +18,6 @@ class BillCategory(models.Model):
 
 class BillSubCategory(models.Model):
     name = models.CharField(max_length=50)
-    slug = models.SlugField(unique=True, max_length=255, db_index=True)
     is_selected = models.BooleanField(default=True)
     bill_category = models.ForeignKey(BillCategory, on_delete=models.CASCADE)
 
@@ -32,6 +31,7 @@ class Building(models.Model):
     name = models.CharField(max_length=50)
     address = models.CharField(max_length=50)
     home_mark = models.BooleanField(default=False)
+    description = models.CharField(max_length=200, default='')
 
     objects = models.Manager()
 
