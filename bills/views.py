@@ -6,7 +6,8 @@ from bills.models import Building, BillSubCategory
 
 
 def index(request):
-    return render(request, 'bills/index.html')
+    buildings = Building.objects.all()
+    return render(request, 'bills/index.html', {'buildings': buildings})
 
 
 def add_building(request):
