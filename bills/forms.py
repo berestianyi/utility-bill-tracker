@@ -19,7 +19,7 @@ class BuildingForm(forms.ModelForm):
         'style': 'color: #ececec; background-color: #1b1d1e'
     }))
 
-    description = forms.CharField(widget=forms.Textarea(attrs={
+    description = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control border-light',
         'placeholder': 'Leave a comment here',
         'id': 'floatingTextarea2',
