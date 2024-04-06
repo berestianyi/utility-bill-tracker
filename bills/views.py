@@ -1,5 +1,8 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+
+from bills.forms import BuildingForm
+from bills.models import Building, BillSubCategory
 
 
 def index(request):
@@ -7,14 +10,25 @@ def index(request):
 
 
 def add_building(request):
-    return render(request, 'bills/add_building.html')
+    if request.method == 'POST':
+        form = BuildingForm(request.POST)
+        if form.is_valid():
+            new_building = form.save(commit=False)
+            new_building.user = request.user
+            new_building.save()
+            form.save_m2m()
+            return redirect('bills:buildings')
+    else:
+        form = BuildingForm()
+
+    return render(request, 'bills/add_building.html', {'form': form})
 
 
 def add_bill(request):
     pass
 
 
-def building(request):
+def building_page(request):
     pass
 
 
