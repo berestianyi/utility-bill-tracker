@@ -6,23 +6,24 @@ from user.models import User
 
 
 class BillCategory(models.Model):
-    name = models.CharField(max_length=50)
+    category_name = models.CharField(max_length=50)
     color = models.CharField(max_length=30, default='Red')
     is_selected = models.BooleanField(default=True)
 
     objects = models.Manager()
 
     def __str__(self):
-        return self.name
+        return self.category_name
 
 
 class BillSubCategory(models.Model):
-    name = models.CharField(max_length=50)
+    sub_category_name = models.CharField(max_length=50)
     is_selected = models.BooleanField(default=True)
     bill_category = models.ForeignKey(BillCategory, on_delete=models.CASCADE)
+    measure_unit = models.CharField(max_length=10, default='watt-hour')
 
     def __str__(self):
-        return self.name
+        return self.sub_category_name
 
 
 class Building(models.Model):
@@ -43,9 +44,8 @@ class Bill(models.Model):
     building = models.ForeignKey(Building, on_delete=models.CASCADE)
     name = models.ForeignKey(BillSubCategory, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=20, decimal_places=3)
-    measure_unit = models.CharField(max_length=10, default='watt-hour')
-    price = models.DecimalField(max_digits=20, decimal_places=3)
-    month_paid = models.DateField(default=date.today)
+    tariff = models.DecimalField(max_digits=20, decimal_places=3)
+    month_paid = models.DateField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True)
 
     objects = models.Manager()
@@ -53,6 +53,5 @@ class Bill(models.Model):
     def __str__(self):
         return self.name
 
-    def get_absolute_url(self):
-        # return reverse()
-        pass
+    def bill_sum(self):
+        return self.amount * self.tariff
