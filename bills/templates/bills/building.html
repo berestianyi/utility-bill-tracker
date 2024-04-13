@@ -13,7 +13,6 @@
               </div>
               <form action="{% url 'bills:add_bill' building.id %}" method="POST" class="card-body">
                   {% csrf_token %}
-                  {{ form.as_p }}
                   <div class="input-group mb-3">
                       {{  form.category }}
                       <label class="input-group-text" for="inputGroupSelect02" style="background-color: #1b1d1e; color: #ececec">Category</label>
@@ -38,30 +37,21 @@
                       <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" style="background-color: #1b1d1e; color: #ececec">
                       <span class="input-group-text" style="background-color: #1b1d1e; color: #ececec">grn</span>
                   </div>
-                  <div class="input-group mb-3">
-                      <input id="datepicker" width="276"/>
+                  <div class="row mb-3">
+                      <div class="input-group col">
+                          <p style="color: #ececec">Pay month:</p>
+                          {{ form.media }}
+                          {{ form.month_paid }}
+                      </div>
+                      <div class="input-group col">
+                          <p style="color: #ececec">Payment day:</p>
+                          {{ form.media }}
+                          {{ form.created_at }}
+                      </div>
                   </div>
-{#                  <div id="button-container"></div>#}
-{#                  <button hx-post="/add-input/" hx-swap="beforeend" hx-target="#button-container" class="btn btn-primary mb-3">#}
-{#                      <a style="color: #ececec; text-decoration: none; font-size: 16px;">#}
-{#                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ececec" class="bi bi-plus-circle-fill" viewBox="0 0 16 16" style="margin-bottom: 0.2rem">#}
-{#                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/>#}
-{#                            </svg>#}
-{#                            Add new bill#}
-{#                      </a>#}
-{#                  </button>#}
                   <button type="submit" class="btn btn-primary" style="color: #ececec">Add bill</button>
               </form>
             </div>
         </div>
     </div>
-    <script>
-    $(document).ready(function() {
-
-        $('#datepicker').datepicker({
-            uiLibrary: 'bootstrap5',
-            format: "mm-yyyy",
-        });
-    });
-    </script>
 {% endblock %}
