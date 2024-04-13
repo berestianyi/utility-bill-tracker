@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
@@ -41,14 +43,7 @@ def add_bill(request, building_key):
 def building_page(request, building_key):
     building = Building.objects.get(pk=building_key)
     if request.method == 'POST':
-        form = BillsForm(request)
-        if form.is_valid():
-            new_bill = form.save(commit=False)
-            new_bill.building = building
-            new_bill.save()
-            return redirect('bills:building')
-    if request.method == 'POST':
-        form = BillsForm(request)
+        form = BillsForm(request, initial={'name': building.name})
         if form.is_valid():
             new_bill = form.save(commit=False)
             new_bill.building = building
