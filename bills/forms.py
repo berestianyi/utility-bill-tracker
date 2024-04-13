@@ -1,4 +1,5 @@
 from django import forms
+from bootstrap_datepicker_plus.widgets import DatePickerInput, MonthPickerInput
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 
 from bills.models import Building, BillSubCategory, Bill, BillCategory
@@ -57,9 +58,33 @@ class BillsForm(forms.ModelForm):
                                         "id": "id_name",
                                         "style": "background-color: #1b1d1e; color: #ececec;"}))
 
+    month_paid = forms.DateField(widget=MonthPickerInput(
+        attrs={
+            "class": "form-control",
+            "placeholder": "Pay month",
+            "type": "text",
+            "style": "background-color: #1b1d1e; color: #ececec;"
+        },
+        options={
+            "format": "MM-YYYY",
+        }
+    ))
+
+    created_at = forms.DateField(widget=DatePickerInput(
+        attrs={
+            "class": "form-control",
+            "placeholder": "Pay month",
+            "type": "text",
+            "style": "background-color: #1b1d1e; color: #ececec;"
+        },
+        options={
+            "format": "DD-MM-YYYY",
+        }
+    ))
+
     class Meta(object):
         model = Bill
-        fields = ['name', 'amount', 'month_paid']
+        fields = ['name', 'amount', 'month_paid', 'created_at']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
