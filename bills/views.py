@@ -44,14 +44,14 @@ def add_bill(request, building_key):
 def building_page(request, building_key):
     building = Building.objects.get(pk=building_key)
     if request.method == 'POST':
-        form = BillsForm(request, initial={'name': building.name})
+        form = BillsForm(request.POST)
         if form.is_valid():
             new_bill = form.save(commit=False)
             new_bill.building = building
             new_bill.save()
-            return redirect('bills:building')
+            return redirect('bills:building', building_key)
     else:
-        form = BillsForm()
+        form = BillsForm(initial={'building': building.id})
     return render(request, 'bills/building.html', {'building': building, 'form': form})
 
 

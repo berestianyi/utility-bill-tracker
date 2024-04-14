@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from django.db import models
 
 from user.models import User
@@ -20,6 +18,7 @@ class BillSubCategory(models.Model):
     sub_category_name = models.CharField(max_length=50)
     is_selected = models.BooleanField(default=True)
     bill_category = models.ForeignKey(BillCategory, on_delete=models.CASCADE)
+    tariff = models.DecimalField(max_digits=20, decimal_places=3, default=1)
     measure_unit = models.CharField(max_length=10, default='watt-hour')
 
     def __str__(self):
@@ -46,12 +45,11 @@ class Bill(models.Model):
     amount = models.DecimalField(max_digits=20, decimal_places=3)
     tariff = models.DecimalField(max_digits=20, decimal_places=3, default=1)
     month_paid = models.DateField(null=True, blank=True)
-    created_at = models.DateTimeField(default=datetime.today().strftime('%d-%m-%Y'))
+    created_at = models.DateTimeField()
+    bill_sum = models.DecimalField(max_digits=20, decimal_places=3, null=True, blank=True)
 
     objects = models.Manager()
 
-    def __str__(self):
-        return self.name
-
-    def bill_sum(self):
-        return self.amount * self.tariff
+    def save(self, *args, **kwargs):
+        self.bill_sum = self.amount * self.tariff
+        super().save(*args, **kwargs)
