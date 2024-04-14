@@ -11,4 +11,5 @@ urlpatterns = [
     path('add_building/', views.add_building, name='add_building'),
     path('building/<int:building_key>/', views.building_page, name='building'),
     path('add-input/', views.add_input, name='add-input'),
+    path('bill_inputs_sum/', views.bill_inputs_sum, name='bill_inputs_sum'),
 ]
