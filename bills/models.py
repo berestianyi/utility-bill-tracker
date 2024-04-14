@@ -44,7 +44,7 @@ class Bill(models.Model):
     building = models.ForeignKey(Building, on_delete=models.CASCADE)
     name = models.ForeignKey(BillSubCategory, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=20, decimal_places=3)
-    tariff = models.DecimalField(max_digits=20, decimal_places=3)
+    tariff = models.DecimalField(max_digits=20, decimal_places=3, default=1)
     month_paid = models.DateField(null=True, blank=True)
     created_at = models.DateTimeField(default=datetime.today().strftime('%d-%m-%Y'))
 

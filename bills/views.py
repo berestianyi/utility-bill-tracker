@@ -1,6 +1,7 @@
 from datetime import datetime
+from decimal import Decimal
 
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 
 from bills.forms import BuildingForm, BillsForm
@@ -72,3 +73,11 @@ def load_measure_unit(request):
     bill = BillSubCategory.objects.filter(pk=bill_name).first()
     return render(request, "bills/include/htmx_measure_unit.html", {'bill': bill})
 
+
+def bill_inputs_sum(request):
+    if request.method == 'POST':
+        amount = request.POST.get("amount", 0)
+        tariff = request.POST.get("tariff", 0)
+        result = Decimal(amount) * Decimal(tariff)
+        return render(request, "bills/include/dynamic_bill_inputs_sum.html", {'result': result})
+    return HttpResponse(status=400)
