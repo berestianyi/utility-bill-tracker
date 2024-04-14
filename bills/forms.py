@@ -58,6 +58,22 @@ class BillsForm(forms.ModelForm):
                                         "id": "id_name",
                                         "style": "background-color: #1b1d1e; color: #ececec;"}))
 
+    amount = forms.DecimalField(widget=forms.NumberInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Amount',
+        'aria-label': "Amount",
+        'style': "color: #ececec; background-color: #1b1d1e;",
+        "id": "amount",
+    }))
+
+    tariff = forms.DecimalField(widget=forms.NumberInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Tariff',
+        'aria-label': "Tariff",
+        'style': "color: #ececec; background-color: #1b1d1e;",
+        "id": "tariff",
+    }))
+
     month_paid = forms.DateField(widget=MonthPickerInput(
         attrs={
             "class": "form-control",
@@ -84,7 +100,7 @@ class BillsForm(forms.ModelForm):
 
     class Meta(object):
         model = Bill
-        fields = ['name', 'amount', 'month_paid', 'created_at']
+        fields = ['name', 'amount', 'tariff', 'month_paid', 'created_at']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
