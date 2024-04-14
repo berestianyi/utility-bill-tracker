@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django import forms
 from bootstrap_datepicker_plus.widgets import DatePickerInput, MonthPickerInput
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
@@ -72,6 +74,7 @@ class BillsForm(forms.ModelForm):
         'aria-label': "Tariff",
         'style': "color: #ececec; background-color: #1b1d1e;",
         "id": "tariff",
+        "value": "1"
     }))
 
     month_paid = forms.DateField(widget=MonthPickerInput(
@@ -91,7 +94,8 @@ class BillsForm(forms.ModelForm):
             "class": "form-control",
             "placeholder": "Pay month",
             "type": "text",
-            "style": "background-color: #1b1d1e; color: #ececec;"
+            "style": "background-color: #1b1d1e; color: #ececec;",
+            "value": f"{datetime.today().strftime('%d-%m-%Y')}",
         },
         options={
             "format": "DD-MM-YYYY",
