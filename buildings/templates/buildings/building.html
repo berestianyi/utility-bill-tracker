@@ -1,4 +1,4 @@
-{% extends 'base.html'%}
+{% extends 'base.html' %}
 {% load static %}
 
 
@@ -11,7 +11,7 @@
               <div class="card-header border-light" style="color: #ececec">
                 Add bill to {{ building.name }}
               </div>
-              <form action="{% url 'bills:building' building.id %}" method="POST" class="card-body">
+              <form action="{% url 'buildings:building' building.id %}" method="POST" class="card-body">
                   {% csrf_token %}
                   <div class="input-group mb-3">
                       {{  form.category }}
@@ -22,7 +22,7 @@
                       <label class="input-group-text" for="inputGroupSelect02" style="background-color: #1b1d1e; color: #ececec">Bill</label>
                   </div>
                   <p class="card-text" style="color: #ececec; font-size: 15px">You can add or change category in category section.</p>
-                  <div hx-post="{% url 'bills:bill_inputs_sum' %}" hx-target="#bill-inputs-sum" hx-trigger="change">
+                  <div hx-post="{% url 'buildings:bill_inputs_sum' %}" hx-target="#bill-inputs-sum" hx-trigger="change">
                       <div class="input-group mb-3">
                           {{ form.amount }}
                           <span class="input-group-text" style="background-color: #1b1d1e; color: #ececec">
@@ -54,94 +54,49 @@
                   <button type="submit" class="btn btn-primary" style="color: #ececec">Add bill</button>
               </form>
             </div>
+
             <div class="border-light w-50" style="background-color: #1b1d1e; min-width: 500px">
                 <div class="btn-group mb-3" role="group" aria-label="Button group with nested dropdown">
                     <button type="button" class="btn btn-primary">Sort by:</button>
-                    <button type="button" class="btn btn-primary">Date</button>
-                    <button type="button" class="btn btn-primary">Cost</button>
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                          Month
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#">Dropdown link</a></li>
-                          <li><a class="dropdown-item" href="#">Dropdown link</a></li>
-                        </ul>
-                    </div>
                     <div class="btn-group" role="group">
                         <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                           Category
                         </button>
                         <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="#">Dropdown lqewrwerwerwerwerwerwerink</a></li>
+                          <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                          Sub Category
+                        </button>
+                        <ul class="dropdown-menu">
                           <li><a class="dropdown-item" href="#">Dropdown link</a></li>
                           <li><a class="dropdown-item" href="#">Dropdown link</a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="card border-light mb-2" style="min-width: 18rem;">
-                  <div class="card-header d-flex justify-content-between">
-                      <p>Trash/Recycling Collection
-                          <span class="badge text-bg-secondary">April 2024</span>
-                      </p>
-                      <p>04.12.2023</p>
-                  </div>
-                  <div class="card-body d-flex">
-                    <h6 class="m-1">  Tariff: <span class="badge text-bg-secondary">2.34  </span></h6>
-                    <h6 class="m-1"> Amount:  <span class="badge text-bg-secondary">234.234 kw-watt  </span></h6>
-                    <h6 class="m-1">  Total sum: <span class="badge text-bg-secondary"> 234234 uan</span></h6>
+                <div class="d-flex justify-content-between" style="min-width: 480px">
+                    <p class="text-light ms-2">04.12.2023</p>
+                    <p class="text-light me-3">234234.23 UAN</p>
+                </div>
+                {% for bill in bills %}
+                <div class="card text-light border-light mb-2"  style="min-width: 18rem; background-color: #1b1d1e; color: #ececec;">
+                  <div class="card-body text-light border-light d-flex justify-content-between">
+                      <p>{{ bill.name }} <span class="badge text-bg-secondary">{{ bill.name.bill_category }}</span></p>
+                      <p class="text-light">{{ bill.bill_sum }} UAN</p>
                   </div>
                 </div>
-                <div class="card border-light mb-2" style="min-width: 18rem;">
-                  <div class="card-header d-flex justify-content-between">
-                      <p>Trash/Recycling Collection
-                          <span class="badge text-bg-secondary">April 2024</span>
-                      </p>
-                      <p>04.12.2023</p>
-                  </div>
-                  <div class="card-body d-flex">
-                    <h6 class="m-1">  Tariff: <span class="badge text-bg-secondary">2.34  </span></h6>
-                    <h6 class="m-1"> Amount:  <span class="badge text-bg-secondary">234.234 kw-watt  </span></h6>
-                    <h6 class="m-1">  Total sum: <span class="badge text-bg-secondary"> 234234 uan</span></h6>
-                  </div>
-                </div>
-                <div class="card border-light mb-2" style="min-width: 18rem;">
-                  <div class="card-header d-flex justify-content-between">
-                      <p>Trash/Recycling Collection
-                          <span class="badge text-bg-secondary">April 2024</span>
-                      </p>
-                      <p>04.12.2023</p>
-                  </div>
-                  <div class="card-body d-flex">
-                    <h6 class="m-1">  Tariff: <span class="badge text-bg-secondary">2.34  </span></h6>
-                    <h6 class="m-1"> Amount:  <span class="badge text-bg-secondary">234.234 kw-watt  </span></h6>
-                    <h6 class="m-1">  Total sum: <span class="badge text-bg-secondary"> 234234 uan</span></h6>
-                  </div>
-                </div>
-                <div class="card border-light mb-2" style="min-width: 18rem;">
-                  <div class="card-header d-flex justify-content-between">
-                      <p>Trash/Recycling Collection
-                          <span class="badge text-bg-secondary">April 2024</span>
-                      </p>
-                      <p>04.12.2023</p>
-                  </div>
-                  <div class="card-body d-flex">
-                    <h6 class="m-1">  Tariff: <span class="badge text-bg-secondary">2.34  </span></h6>
-                    <h6 class="m-1"> Amount:  <span class="badge text-bg-secondary">234.234 kw-watt  </span></h6>
-                    <h6 class="m-1">  Total sum: <span class="badge text-bg-secondary"> 234234 uan</span></h6>
-                  </div>
-                </div>
-                <div class="card border-light mb-2" style="min-width: 18rem;">
-                  <div class="card-header d-flex justify-content-between">
-                      <p>Trash/Recycling Collection
-                          <span class="badge text-bg-secondary">April 2024</span>
-                      </p>
-                      <p>04.12.2023</p>
-                  </div>
-                  <div class="card-body d-flex">
-                    <h6 class="m-1">  Tariff: <span class="badge text-bg-secondary">2.34  </span></h6>
-                    <h6 class="m-1"> Amount:  <span class="badge text-bg-secondary">234.234 kw-watt  </span></h6>
-                    <h6 class="m-1">  Total sum: <span class="badge text-bg-secondary"> 234234 uan</span></h6>
-                  </div>
+                {% endfor %}
+                <div class="d-flex justify-content-center">
+                    <ul class="pagination">
+                            <li class="page-item"><a class="page-link" style="background-color: #1b1d1e; color: #ececec;" href="#">Previous</a></li>
+                            <li class="page-item"><a class="page-link" style="background-color: #1b1d1e; color: #ececec;" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" style="background-color: #1b1d1e; color: #ececec;" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" style="background-color: #1b1d1e; color: #ececec;" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" style="background-color: #1b1d1e; color: #ececec;" href="#">Next</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
