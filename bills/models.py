@@ -3,7 +3,6 @@ from datetime import datetime
 from django.db import models
 
 from user.models import User
-from buildings.models import Building
 
 
 class BillCategory(models.Model):
@@ -24,6 +23,9 @@ class BillSubCategory(models.Model):
 
     def __str__(self):
         return self.sub_category_name
+
+
+from buildings.models import Building
 
 
 class Bill(models.Model):

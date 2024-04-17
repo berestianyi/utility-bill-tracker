@@ -22,7 +22,7 @@
                       <label class="input-group-text" for="inputGroupSelect02" style="background-color: #1b1d1e; color: #ececec">Bill</label>
                   </div>
                   <p class="card-text" style="color: #ececec; font-size: 15px">You can add or change category in category section.</p>
-                  <div hx-post="{% url 'buildings:bill_inputs_sum' %}" hx-target="#bill-inputs-sum" hx-trigger="change">
+                  <div hx-post="{% url 'bills:bill_inputs_sum' %}" hx-target="#bill-inputs-sum" hx-trigger="change">
                       <div class="input-group mb-3">
                           {{ form.amount }}
                           <span class="input-group-text" style="background-color: #1b1d1e; color: #ececec">

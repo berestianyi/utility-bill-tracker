@@ -19,7 +19,7 @@ def add_building(request):
             new_building.user = request.user
             new_building.save()
             form.save_m2m()
-            return redirect('bills:buildings')
+            return redirect('buildings:index')
     else:
         form = BuildingForm()
     return render(request, 'buildings/add_building.html', {'form': form})
@@ -34,7 +34,7 @@ def building_page(request, building_key):
             new_bill = form.save(commit=False)
             new_bill.building = building
             new_bill.save()
-            return redirect('bills:building', building_key)
+            return redirect('buildings:building', building_key)
         else:
             print("form is not valid")
     else:

@@ -17,7 +17,7 @@
                 </a>
             </div>
             {% for card in buildings %}
-            <a href="{% url 'bills:building' card.id %}" class="card border-light m-3" style="max-width: 18rem; background-color: #1b1d1e; color: #ececec; text-decoration: none">
+            <a href="{% url 'buildings:building' card.id %}" class="card border-light m-3" style="max-width: 18rem; background-color: #1b1d1e; color: #ececec; text-decoration: none">
                   <div class="card-header border-light">{{ card.name}}</div>
                   <div class="card-body">
                         <h5 class="card-title">{{ card.address }}</h5>

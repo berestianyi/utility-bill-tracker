@@ -11,7 +11,7 @@
               <div class="card-header border-light" style="color: #ececec">
                 Add building
               </div>
-              <form action="{% url 'bills:add_building' %}" method="post" class="card-body">
+              <form action="{% url 'buildings:add_building' %}" method="post" class="card-body">
                   {% csrf_token %}
                   <div class="form-floating border-light mb-3" style="color: #ececec">
                       {{ form.name }}
