@@ -95,7 +95,6 @@ class BillsForm(forms.ModelForm):
             "placeholder": "Pay month",
             "type": "text",
             "style": "background-color: #1b1d1e; color: #ececec;",
-            "value": f"{datetime.today().strftime('%d-%m-%Y')}",
         },
         options={
             "format": "DD-MM-YYYY",
