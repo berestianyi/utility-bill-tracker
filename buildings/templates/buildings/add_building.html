@@ -15,33 +15,22 @@
                   {% csrf_token %}
                   <div class="form-floating border-light mb-3" style="color: #ececec">
                       {{ form.name }}
-{#                      <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">#}
                       <label for="floatingInput">Write name of building</label>
                   </div>
                   <div class="form-floating border-light mb-3" style="color: #ececec">
                       {{ form.address }}
-{#                      <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">#}
                       <label for="floatingInput">Write building address</label>
                   </div>
                   <hr style="color: #ececec"/>
                   <p class="card-text" style="color: #ececec">You can write a description for your building</p>
-                  <div class="form-floating border-light mb-3" style="color: #ececec">
+                  <div class="mb-3" style="color: #ececec">
+                      <label for="TextareaDescription" class="form-label">Example textarea</label>
                       {{ form.description }}
-                      <label for="floatingTextarea2">Description</label>
                   </div>
                   <div class="form-check border-light mb-3" style="color: #ececec">
                       {{ form.home_mark }}
                       <label class="form-check-label" for="flexCheckDefault">Home mark</label>
                   </div>
-{#                  <div id="button-container"></div>#}
-{#                  <button hx-post="/add-input/" hx-swap="beforeend" hx-target="#button-container" class="btn btn-primary mb-3">#}
-{#                      <a style="color: #ececec; text-decoration: none; font-size: 16px;">#}
-{#                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ececec" class="bi bi-plus-circle-fill" viewBox="0 0 16 16" style="margin-bottom: 0.2rem">#}
-{#                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/>#}
-{#                            </svg>#}
-{#                            Add new bill#}
-{#                      </a>#}
-{#                  </button>#}
                   <h5 class="card-title" style="color: #ececec">Make sure you've written everything correct</h5>
                   <p class="card-text" style="color: #ececec">And don't worry, you'll be able to change anything in the settings.</p>
                   <button type="submit" class="btn btn-primary" style="color: #ececec">Add building</button>

@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Your building{% endblock %}
 
+{% block title %}Your building{% endblock %}
+{% block head %} {% include 'charts/include/building_chart_script.html' %} {% endblock %}
 {% block body %}
     <div class="container-fluid">
         <div class="d-flex row justify-content-center" style="margin-top: 6rem">
@@ -35,61 +36,11 @@
                   Launch demo modal
                 </button>
                 </div>
-
-{#              <form action="{% url 'buildings:building' building.id %}" method="POST" class="card-body">#}
-{#                  {% csrf_token %}#}
-{#                  <div class="input-group mb-3">#}
-{#                      {{  form.category }}#}
-{#                      <label class="input-group-text" for="inputGroupSelect02" style="background-color: #1b1d1e; color: #ececec">Category</label>#}
-{#                  </div>#}
-{#                   <div class="input-group mb-3">#}
-{#                       {{ form.name }}#}
-{#                      <label class="input-group-text" for="inputGroupSelect02" style="background-color: #1b1d1e; color: #ececec">Bill</label>#}
-{#                  </div>#}
-{#                  <p class="card-text" style="color: #ececec; font-size: 15px">You can add or change category in category section.</p>#}
-{#                  <div hx-post="{% url 'bills:bill_inputs_sum' %}" hx-target="#bill-inputs-sum" hx-trigger="change">#}
-{#                      <div class="input-group mb-3">#}
-{#                          {{ form.amount }}#}
-{#                          <span class="input-group-text" style="background-color: #1b1d1e; color: #ececec">#}
-{#                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">#}
-{#                                  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>#}
-{#                              </svg>#}
-{#                          </span>#}
-{#                          {{ form.tariff }}#}
-{#                          <span class="input-group-text" style="background-color: #1b1d1e; color: #ececec" id="measure_unit"></span>#}
-{#                      </div>#}
-{#                      <div class="input-group mb-3" id="bill-inputs-sum">#}
-{#                          <span class="input-group-text" style="background-color: #1b1d1e; color: #ececec">=</span>#}
-{#                          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" style="background-color: #1b1d1e; color: #ececec" readonly>#}
-{#                          <span class="input-group-text" style="background-color: #1b1d1e; color: #ececec">grn</span>#}
-{#                      </div>#}
-{#                  </div>#}
-{#                  <div class="row mb-3">#}
-{#                      <div class="input-group col">#}
-{#                          <p style="color: #ececec">Pay month:</p>#}
-{#                          {{ form.media }}#}
-{#                          {{ form.month_paid }}#}
-{#                      </div>#}
-{#                      <div class="input-group col">#}
-{#                          <p style="color: #ececec">Payment day:</p>#}
-{#                          {{ form.media }}#}
-{#                          {{ form.created_at }}#}
-{#                      </div>#}
-{#                  </div>#}
-{#                  <button type="submit" class="btn btn-primary" style="color: #ececec">Add bill</button>#}
-{#              </form>#}
             </div>
 
             <div class="border-light w-50" style="background-color: #1b1d1e; min-width: 500px">
-                <div class="card border-light mb-3"  style="background-color: #1b1d1e; min-width: 480px; max-height: 480px">
-                  <div class="card-header border-light" style="color: #ececec">
-                      <h5>Chart of monthly payments for utilities</h5>
-                  </div>
-                    <div class="card-body">
-                        <div>
-                        </div>
-                    </div>
-                </div>
+                {% include 'charts/building_chart.html' %}
+
                 <div class="btn-group mb-3" role="group" aria-label="Button group with nested dropdown">
                     <button type="button" class="btn btn-primary">Sort by:</button>
                     <div class="btn-group" role="group">
