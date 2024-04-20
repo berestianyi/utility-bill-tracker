@@ -1,0 +1,15 @@
+<div class="border-light w-50" style="background-color: #1b1d1e; min-width: 500px; margin-top: 100px; margin-left: 100px">
+    <div class="card border-light mb-3"  style="background-color: #1b1d1e; min-width: 480px; max-height: 480px">
+      <div class="card-header border-light" style="color: #ececec">
+          <h5>{{ building.name }}
+              {% if building.home_mark is True %}
+                <span class="badge text-bg-info">Home</span>
+              {% endif %}
+          </h5>
+      </div>
+        <div class="card-body">
+            <div id="chartContainer" style="width: 100%; height: 360px;"></div>
+            <script src="{% static 'js/canvasjs.min.js' %}"></script>
+        </div>
+    </div>
+</div>
