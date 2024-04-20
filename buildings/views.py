@@ -28,15 +28,9 @@ def add_building(request):
 def building_page(request, building_key):
     building = Building.objects.get(pk=building_key)
     bills = Bill.objects.all().filter(building=building_key)
-    if request.method == 'POST':
-        form = BillsForm(request.POST)
-        if form.is_valid():
-            new_bill = form.save(commit=False)
-            new_bill.building = building
-            new_bill.save()
-            return redirect('buildings:building', building_key)
-        else:
-            print("form is not valid")
-    else:
-        form = BillsForm()
-    return render(request, 'buildings/building.html', {'building': building, 'form': form, 'bills': bills})
+    total = Bill.total_sum(building_key=building_key)
+    return render(request, 'buildings/building.html', {
+        'building': building,
+        'bills': bills,
+        'total_sum': total,
+    })

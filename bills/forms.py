@@ -22,8 +22,8 @@ class BillsForm(forms.ModelForm):
                                       }))
     name = forms.ModelChoiceField(queryset=BillSubCategory.objects.none(),
                                   widget=forms.Select(attrs={
-                                        "hx-get": "/load_measure_unit/",
-                                        "hx-target": "#measure_unit",
+                                        "hx-get": "/load_tariff_and_measure_unit/",
+                                        "hx-target": "#tariff_and_measure_unit",
                                         "class": 'form-select',
                                         "id": "id_name",
                                         "style": "background-color: #1b1d1e; color: #ececec;"}))
@@ -34,15 +34,6 @@ class BillsForm(forms.ModelForm):
         'aria-label': "Amount",
         'style': "color: #ececec; background-color: #1b1d1e;",
         "id": "amount",
-    }))
-
-    tariff = forms.DecimalField(widget=forms.NumberInput(attrs={
-        'class': 'form-control',
-        'placeholder': 'Tariff',
-        'aria-label': "Tariff",
-        'style': "color: #ececec; background-color: #1b1d1e;",
-        "id": "tariff",
-        "value": "1"
     }))
 
     month_paid = forms.DateField(widget=MonthPickerInput(
@@ -71,7 +62,7 @@ class BillsForm(forms.ModelForm):
 
     class Meta(object):
         model = Bill
-        fields = ['name', 'amount', 'tariff', 'month_paid', 'created_at']
+        fields = ['name', 'amount', 'month_paid', 'created_at']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -79,4 +70,3 @@ class BillsForm(forms.ModelForm):
         if "category" in self.data:
             category_id = int(self.data["category"])
             self.fields['name'].queryset = BillSubCategory.objects.filter(bill_category=category_id)
-

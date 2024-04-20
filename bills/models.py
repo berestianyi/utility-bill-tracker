@@ -1,6 +1,8 @@
 from datetime import datetime
+from decimal import Decimal
 
 from django.db import models
+from django.db.models import Sum
 
 from user.models import User
 
@@ -35,10 +37,17 @@ class Bill(models.Model):
     tariff = models.DecimalField(max_digits=20, decimal_places=3, default=1)
     month_paid = models.DateField(null=True, blank=True)
     created_at = models.DateTimeField()
-    bill_sum = models.DecimalField(max_digits=20, decimal_places=3, null=True, blank=True)
+    bill_sum = models.DecimalField(max_digits=20, decimal_places=2, null=True, blank=True)
 
     objects = models.Manager()
 
     def save(self, *args, **kwargs):
+        self.tariff = self.name.tariff
         self.bill_sum = self.amount * self.tariff
         super().save(*args, **kwargs)
+
+    @staticmethod
+    def total_sum(building_key):
+        building_bills = Bill.objects.all().filter(building=building_key)
+        total = sum(bill.bill_sum for bill in building_bills)
+        return total

@@ -1,0 +1,54 @@
+<form action="{% url 'bills:add_bill' building.id %}" method="POST" class="modal-content" style="background-color: #1b1d1e; color: #ececec">
+    <div class="modal-header" style="background-color: #1b1d1e; color: #ececec">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add bill to {{ building.name }}</h1>
+    </div>
+    <div class="modal-body" hx-post="{% url 'bills:bill_inputs_sum' %}" hx-target="#bill-inputs-sum" hx-trigger="change">
+      {% csrf_token %}
+      <div class="input-group mb-3">
+          {{  form.category }}
+          <label class="input-group-text" for="inputGroupSelect02" style="background-color: #1b1d1e; color: #ececec">Category</label>
+      </div>
+       <div class="input-group mb-3">
+           {{ form.name }}
+          <label class="input-group-text" for="inputGroupSelect02" style="background-color: #1b1d1e; color: #ececec">Bill</label>
+      </div>
+      <p class="card-text" style="color: #ececec; font-size: 15px">You can add or change category in category section.</p>
+      <div>
+          <div class="row mb-3">
+              <div class="input-group col" style="max-width: 200px">
+                  {{ form.amount }}
+              </div>
+                  <div class="col d-flex justify-content-center align-items-center" style="background-color: #1b1d1e; color: #ececec; max-width: 42px; max-height: 42px">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                          <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                      </svg>
+                  </div>
+              <div class="input-group col" id="tariff_and_measure_unit">
+                  <input type="text" id="tariff" class="form-control" aria-label="tariff" style="background-color: #1b1d1e; color: #ececec">
+                  <span class="input-group-text" style="background-color: #1b1d1e; color: #ececec">none</span>
+              </div>
+          </div>
+          <div class="input-group mb-3" id="bill-inputs-sum">
+              <span class="input-group-text" style="background-color: #1b1d1e; color: #ececec">=</span>
+              <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" style="background-color: #1b1d1e; color: #ececec" readonly>
+              <span class="input-group-text" style="background-color: #1b1d1e; color: #ececec">grn</span>
+          </div>
+      </div>
+      <div class="row mb-3">
+          <div class="input-group col">
+              <p style="color: #ececec">Pay month:</p>
+              {{ form.media }}
+              {{ form.month_paid }}
+          </div>
+          <div class="input-group col">
+              <p style="color: #ececec">Payment day:</p>
+              {{ form.media }}
+              {{ form.created_at }}
+          </div>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" style="color: #ececec">Add bill</button>
+      </div>
+</form>
