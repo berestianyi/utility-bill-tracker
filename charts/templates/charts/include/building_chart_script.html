@@ -34,6 +34,12 @@ window.onload = function () {
             showInLegend: true,
             yValueFormatString: "#,##0",
             dataPoints: {{ user_data_2021|safe }}
+        },{
+            type: "line",
+            name: "2023",
+            showInLegend: true,
+            yValueFormatString: "#,##0",
+            dataPoints: {{ user_data_2023|safe }}
         }]
     });
     chart.render();
