@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'user.apps.UserConfig',
     'bills.apps.BillsConfig',
     'buildings.apps.BuildingsConfig',
+    'charts.apps.ChartsConfig',
     'django_bootstrap5',
     'bootstrap_datepicker_plus',
 ]
