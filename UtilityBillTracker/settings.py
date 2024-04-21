@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'UtilityBillTracker.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'bills',
+        'NAME': 'UBT',
         'USER': 'postgres',
         'PASSWORD': '1031',
         'HOST': 'localhost',
