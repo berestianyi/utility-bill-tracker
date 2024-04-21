@@ -56,11 +56,9 @@ class BillTypeListView(BuildingDataMixin, ListView):
     context_object_name = 'bills'
 
     def get_queryset(self):
-        building_slug = self.kwargs['building_slug']
-        bill_type_slug = self.kwargs['building_slug']
-        bills = Bill.objects.filter(building__slug=building_slug)
-        return bills.filter(name__slug=bill_type_slug)
-
+        bill_type = BillType.objects.get(slug=self.kwargs['bill_type_slug'])
+        bills = Bill.objects.filter(building__slug=self.kwargs['building_slug'])
+        return bills.filter(name=bill_type.id)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
