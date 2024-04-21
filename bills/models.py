@@ -1,30 +1,23 @@
 from datetime import datetime
-from decimal import Decimal
-
 from django.db import models
-from django.db.models import Sum
-
+from django.utils.text import slugify
+from django.utils import timezone
 from user.models import User
 
 
-class BillCategory(models.Model):
-    category_name = models.CharField(max_length=50)
-    color = models.CharField(max_length=30, default='Red')
-
-    objects = models.Manager()
-
-    def __str__(self):
-        return self.category_name
-
-
-class BillSubCategory(models.Model):
-    sub_category_name = models.CharField(max_length=50)
-    bill_category = models.ForeignKey(BillCategory, on_delete=models.CASCADE)
+class BillType(models.Model):
+    type_name = models.CharField(max_length=50)
     tariff = models.DecimalField(max_digits=20, decimal_places=3, default=1)
     measure_unit = models.CharField(max_length=10, default='watt-hour')
+    slug = models.SlugField(unique=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.type_name)
+        super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.sub_category_name
+        return self.type_name
 
 
 from buildings.models import Building
@@ -32,11 +25,11 @@ from buildings.models import Building
 
 class Bill(models.Model):
     building = models.ForeignKey(Building, on_delete=models.CASCADE)
-    name = models.ForeignKey(BillSubCategory, on_delete=models.CASCADE)
+    name = models.ForeignKey(BillType, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=20, decimal_places=3)
     tariff = models.DecimalField(max_digits=20, decimal_places=3, default=1)
     month_paid = models.DateField(null=True, blank=True)
-    created_at = models.DateTimeField()
+    created_at = models.DateTimeField(default=timezone.now, blank=True)
     bill_sum = models.DecimalField(max_digits=20, decimal_places=2, null=True, blank=True)
 
     objects = models.Manager()
@@ -47,7 +40,7 @@ class Bill(models.Model):
         super().save(*args, **kwargs)
 
     @staticmethod
-    def total_sum(building_key):
-        building_bills = Bill.objects.all().filter(building=building_key)
+    def total_sum(building_slug):
+        building_bills = Bill.objects.all().filter(building__slug=building_slug)
         total = sum(bill.bill_sum for bill in building_bills)
         return total
