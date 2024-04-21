@@ -16,14 +16,30 @@
                     Add new address
                 </a>
             </div>
-            {% for card in buildings %}
-            <a href="{% url 'buildings:building' card.id %}" class="card border-light m-3" style="max-width: 18rem; background-color: #1b1d1e; color: #ececec; text-decoration: none">
-                  <div class="card-header border-light">{{ card.name}}</div>
-                  <div class="card-body">
-                        <h5 class="card-title">{{ card.address }}</h5>
-                        <p class="card-text">{{ card.description }}</p>
-                  </div>
-            </a>
+            {% for building in buildings %}
+            <div style="max-width: 18rem;">
+                <div class="d-flex card border-light m-3" style="max-width: 18rem; background-color: #1b1d1e; color: #ececec; text-decoration: none">
+                      <a href="{% url 'buildings:building' building.slug %}" style="text-decoration: none; color: #ececec">
+                          <div class="card-header border-light ">{{ building.name }}
+                          {% if building.home_mark is True %}
+                              <span class="badge text-bg-info">Home</span>
+                          {% endif %}
+                          </div>
+                      </a>
+                          <div class="card-body">
+                               <a href="{% url 'buildings:building' building.slug %}" style="text-decoration: none; color: #ececec">
+                                   <h5 class="card-title">{{ building.address }}</h5>
+                                   <p class="card-text">{{ building.description | truncatechars:70 }}</p>
+                               </a>
+                              <button type="button" class="btn btn-light col me-1 mt-2" data-bs-toggle="modal" data-bs-target="#{{ building.slug }}">Add new bill</button>
+                        </div>
+                </div>
+            </div>
+            <div class="modal fade" id="{{ building.slug }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        {% include 'bills/add_bill.html' %}
+                    </div>
+            </div>
             {% endfor %}
         </div>
     </div>
