@@ -15,7 +15,7 @@ def login(request):
             user = auth.authenticate(username=username, password=password)
             if user and user.is_active:
                 auth.login(request, user)
-                return HttpResponseRedirect(reverse('bills:index'))
+                return HttpResponseRedirect(reverse('buildings:index'))
     else:
         form = UserLoginForm()
 
@@ -49,4 +49,4 @@ def profile_change(request):
 
 def logout(request):
     auth.logout(request)
-    return redirect('bills:index')
+    return redirect('buildings:index')
