@@ -18,11 +18,10 @@ class BuildingForm(forms.ModelForm):
         'style': 'color: #ececec; background-color: #1b1d1e'
     }))
 
-    description = forms.CharField(widget=forms.Textarea(attrs={
+    description = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control border-light',
         'id': 'TextareaDescription',
-        'rows': '3',
-        'style': "color: #ececec; height: 100px; background-color: #1b1d1e;"
+        'style': "color: #ececec; background-color: #1b1d1e;"
     }))
 
     home_mark = forms.CheckboxInput(attrs={
@@ -32,4 +31,4 @@ class BuildingForm(forms.ModelForm):
 
     class Meta(object):
         model = Building
-        fields = ('name', 'address', 'home_mark')
+        fields = ('name', 'address', 'home_mark', 'description')
