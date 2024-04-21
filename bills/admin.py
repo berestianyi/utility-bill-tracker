@@ -1,7 +1,6 @@
 from django.contrib import admin
 
-from bills.models import Bill, BillSubCategory, BillCategory
+from bills.models import Bill, BillType
 
-admin.site.register(BillCategory)
+admin.site.register(BillType)
 admin.site.register(Bill)
-admin.site.register(BillSubCategory)
