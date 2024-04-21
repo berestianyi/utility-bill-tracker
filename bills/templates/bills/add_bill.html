@@ -1,13 +1,9 @@
-<form action="{% url 'bills:add_bill' building.id %}" method="POST" class="modal-content" style="background-color: #1b1d1e; color: #ececec">
+<form action="{% url 'bills:add_bill' building.slug %}" method="POST" class="modal-content" style="background-color: #1b1d1e; color: #ececec">
     <div class="modal-header" style="background-color: #1b1d1e; color: #ececec">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Add bill to {{ building.name }}</h1>
     </div>
     <div class="modal-body" hx-post="{% url 'bills:bill_inputs_sum' %}" hx-target="#bill-inputs-sum" hx-trigger="change">
       {% csrf_token %}
-      <div class="input-group mb-3">
-          {{  form.category }}
-          <label class="input-group-text" for="inputGroupSelect02" style="background-color: #1b1d1e; color: #ececec">Category</label>
-      </div>
        <div class="input-group mb-3">
            {{ form.name }}
           <label class="input-group-text" for="inputGroupSelect02" style="background-color: #1b1d1e; color: #ececec">Bill</label>
@@ -24,7 +20,7 @@
                       </svg>
                   </div>
               <div class="input-group col" id="tariff_and_measure_unit">
-                  <input type="text" id="tariff" class="form-control" aria-label="tariff" style="background-color: #1b1d1e; color: #ececec">
+                  <input type="text" id="tariff" class="form-control" aria-label="tariff" style="background-color: #1b1d1e; color: #ececec" readonly>
                   <span class="input-group-text" style="background-color: #1b1d1e; color: #ececec">none</span>
               </div>
           </div>
@@ -40,15 +36,10 @@
               {{ form.media }}
               {{ form.month_paid }}
           </div>
-          <div class="input-group col">
-              <p style="color: #ececec">Payment day:</p>
-              {{ form.media }}
-              {{ form.created_at }}
+          <div class="col align-self-end">
+              <button type="button" class="btn btn-secondary col me-1" data-bs-dismiss="modal" style="max-height: 40px">Close</button>
+              <button type="submit" class="btn btn-primary col ms-1" style="color: #ececec; max-height: 40px">Add bill</button>
           </div>
       </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" style="color: #ececec">Add bill</button>
       </div>
 </form>
