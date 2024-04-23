@@ -44,6 +44,7 @@ class BuildingListView(BuildingDataMixin, ListView):
         context = super().get_context_data(**kwargs)
         building_slug = self.kwargs['building_slug']
         building = Building.objects.get(slug=building_slug)
+        context['select_name'] = 'Utility bill type'
         context['building'] = building
         context['bill_types'] = BillType.objects.all()
         context['total_sum'] = Bill.total_sum(building_slug=building_slug)
@@ -64,6 +65,7 @@ class BillTypeListView(BuildingDataMixin, ListView):
         context = super().get_context_data(**kwargs)
         building_slug = self.kwargs['building_slug']
         building = Building.objects.get(slug=building_slug)
+        context['select_name'] = BillType.objects.get(slug=self.kwargs['bill_type_slug']).type_name
         context['building'] = building
         context['bill_types'] = BillType.objects.all()
         context['total_sum'] = Bill.total_sum(building_slug=building_slug)
