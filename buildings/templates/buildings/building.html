@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load date_filter %}
 {% load static %}
 
 
@@ -48,7 +49,7 @@
                     <div class="btn-group" role="group">
                         <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                            Utility bill type
+                            {{ select_name }}
                         </button>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{% url 'buildings:building' building.slug %}">All bills</a></li>
@@ -58,34 +59,47 @@
                         </ul>
                     </div>
                 </div>
-                <div class="d-flex justify-content-between" style="min-width: 480px">
-                    <p class="text-light ms-2">04.12.2023</p>
-                    <p class="text-light me-3">234234.23 UAN</p>
-                </div>
                 {% for bill in bills %}
+                    {% with previous_date=bills|get_previous_date:forloop.counter0 %}
+                        {% if not previous_date or bill.str_time != previous_date %}
+                                <div class="d-flex justify-content-between mt-2" style="min-width: 480px; max-height: 30px ;">
+                                        <p class="text-light ms-2">{{ bill.str_time }}</p>
+                                </div>
+                        {% endif %}
+                    {% endwith %}
                     <div class="card text-light border-light mb-2"
-                         style="min-width: 18rem; background-color: #1b1d1e; color: #ececec;">
+                         style="min-width: 18rem; max-height: 50px ; background-color: #1b1d1e; color: #ececec;">
                         <div class="card-body text-light border-light d-flex justify-content-between">
                             <p>{{ bill.name }} <span
-                                    class="badge text-bg-secondary">{{ bill.name.bill_category }}</span></p>
+                                    class="badge text-bg-secondary">{{ bill.str_time }}</span></p>
                             <p class="text-light">{{ bill.bill_sum }} UAN</p>
                         </div>
                     </div>
                 {% endfor %}
+                {% if page_obj.has_other_pages %}
                 <div class="d-flex justify-content-center">
                     <ul class="pagination">
-                        <li class="page-item"><a class="page-link" style="background-color: #1b1d1e; color: #ececec;"
-                                                 href="#">Previous</a></li>
-                        <li class="page-item"><a class="page-link" style="background-color: #1b1d1e; color: #ececec;"
-                                                 href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" style="background-color: #1b1d1e; color: #ececec;"
-                                                 href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" style="background-color: #1b1d1e; color: #ececec;"
-                                                 href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" style="background-color: #1b1d1e; color: #ececec;"
-                                                 href="#">Next</a></li>
+                        {% if page_obj.has_previous %}
+                            <li class="page-item"><a class="page-link" style="background-color: #1b1d1e; color: #ececec;"
+                                                 href="?page={{ page_obj.previous_page_number }}">&lt;</a></li>
+                        {%  endif %}
+                        {%  for p in paginator.page_range %}
+
+                            {% if page_obj.number == p %}
+                                <li class="page-item"><a class="page-link" style="background-color: #ececec; color: #1b1d1e;">{{ p }}</a></li>
+                            {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
+                            <li class="page-item"><a class="page-link" style="background-color: #1b1d1e; color: #ececec;"
+                                                 href="?page={{ p }}">{{ p }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if page_obj.has_next %}
+                            <li class="page-item"><a class="page-link" style="background-color: #1b1d1e; color: #ececec;"
+                                                 href="?page={{ page_obj.next_page_number }}">&gt;</a></li>
+                        {% endif %}
                     </ul>
                 </div>
+                {% endif %}
             </div>
         </div>
     </div>
