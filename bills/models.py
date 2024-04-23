@@ -39,6 +39,10 @@ class Bill(models.Model):
         self.bill_sum = self.amount * self.tariff
         super().save(*args, **kwargs)
 
+    def str_time(self):
+        date_created = self.created_at.strftime('%d.%m.%Y')
+        return date_created
+
     @staticmethod
     def total_sum(building_slug):
         building_bills = Bill.objects.all().filter(building__slug=building_slug)
