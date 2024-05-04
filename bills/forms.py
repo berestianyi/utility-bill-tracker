@@ -41,3 +41,17 @@ class BillsForm(forms.ModelForm):
         model = Bill
         fields = ['name', 'amount', 'month_paid']
 
+
+class UploadFileBillForm(forms.ModelForm):
+    file = forms.FileField(widget=forms.ClearableFileInput(
+        attrs={
+            "class": 'form-control',
+            "type": 'file',
+            "id": 'formFile',
+            "style": 'background-color: #1b1d1e; color: #ececec;',
+            "name": 'bill_file'
+        }))
+
+    class Meta(object):
+        model = Bill
+        fields = ['bill_file']

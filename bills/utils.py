@@ -1,5 +1,12 @@
 import re
 from decimal import Decimal
+from PyPDF2 import PdfReader
+
+
+def pdf_reader(file) -> str:
+    reader = PdfReader(file)
+    page = reader.pages[0]
+    return page.extract_text()
 
 
 def is_heat_bill(pdf_text: str) -> bool:
@@ -7,9 +14,9 @@ def is_heat_bill(pdf_text: str) -> bool:
     return bool(pattern.search(pdf_text))
 
 
-def heat_total_price(pdf_text: str) -> Decimal:
+def heat_total_price(pdf_text: str) -> str:
     total_str = re.search(r'ПДВ:(.*?)\nВсього до', pdf_text).group(1)
-    return Decimal(''.join(total_str.split(' ')).replace(",", "."))
+    return ''.join(total_str.split(' ')).replace(",", ".")
 
 
 def general_bill_info(pdf_text: str) -> dict:

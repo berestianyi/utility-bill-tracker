@@ -31,6 +31,7 @@ class Bill(models.Model):
     month_paid = models.DateField(null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now, blank=True)
     bill_sum = models.DecimalField(max_digits=20, decimal_places=2, null=True, blank=True)
+    bill_file = models.FileField(upload_to='media/bills/files', null=True, blank=True)
 
     objects = models.Manager()
 

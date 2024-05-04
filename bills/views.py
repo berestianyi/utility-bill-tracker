@@ -3,10 +3,10 @@ from decimal import Decimal
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
-from bills.forms import BillsForm
-from bills.models import BillType
-from buildings.forms import BuildingForm
+from bills.forms import BillsForm, UploadFileBillForm
+from bills.models import BillType, Bill
 from buildings.models import Building
+import bills.utils as utils
 
 
 def add_bill(request, building_slug):
@@ -17,6 +17,31 @@ def add_bill(request, building_slug):
             new_bill = form.save(commit=False)
             new_bill.building = building
             new_bill.save()
+            return redirect('buildings:building', building_slug)
+        else:
+            print("form is not valid")
+    else:
+        form = BillsForm()
+        return render(request, 'bills/add_bill.html', {'form': form})
+
+
+def add_file_bill(request, building_slug):
+    building = Building.objects.get(slug=building_slug)
+    # bills = Bill.objects.filter(name__bill=)
+    if request.method == 'POST':
+        form = UploadFileBillForm(request.POST, request.FILES)
+        if form.is_valid():
+            uploaded_file = request.FILES['bill_file']
+            text_from_pdf = utils.pdf_reader(uploaded_file)
+            general_info_dict: dict = utils.general_bill_info(text_from_pdf)
+            if utils.is_heat_bill(text_from_pdf):
+                heat_total_price_dict: str = utils.heat_total_price(text_from_pdf)
+            else:
+                communal_services_dict: dict = utils.communal_services_extract(text_from_pdf)
+
+            new_bill = form.save(commit=False)
+            new_bill.building = building
+            new_bill.name = new_bill.name
             return redirect('buildings:building', building_slug)
         else:
             print("form is not valid")
