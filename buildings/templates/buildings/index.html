@@ -32,6 +32,7 @@
                                    <p class="card-text">{{ building.description | truncatechars:70 }}</p>
                                </a>
                               <button type="button" class="btn btn-light col me-1 mt-2" data-bs-toggle="modal" data-bs-target="#{{ building.slug }}">Add new bill</button>
+                              <button type="button" class="btn btn-light col me-1 mt-2" data-bs-toggle="modal" data-bs-target="#{{ building.slug }}File">Add file as bill</button>
                         </div>
                 </div>
             </div>
@@ -39,6 +40,11 @@
                     <div class="modal-dialog modal-dialog-centered">
                         {% include 'bills/add_bill.html' %}
                     </div>
+            </div>
+            <div class="modal fade" id="{{ building.slug }}File" tabindex="-1" aria-labelledby="AddFileBillLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    {% include 'bills/add_file_bill.html' %}
+                </div>
             </div>
             {% endfor %}
         </div>
