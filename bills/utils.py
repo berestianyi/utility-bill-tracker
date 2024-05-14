@@ -45,11 +45,10 @@ def general_bill_info(pdf_text: str) -> dict:
 
 
 def communal_services_extract(pdf_text: str) -> dict:
-    gen_names = {'maintenance_of_the_building': r'(\s[1-9]\s\w+,\w+|\w+,\w+|\w+)\nВнесок на утримання охорони',
+    gen_names = {'hoa-fees': r'(\s[1-9]\s\w+,\w+|\w+,\w+|\w+)\nВнесок на утримання охорони',
                  'security': r'(\s[1-9]\s\w+,\w+|\w+,\w+|\w+)\nЗагальні показники лічильників',
-                 'water_supply': r'(\s[1-9]\s\w+,\w+|\w+,\w+|\w+)\nСпоживання електричної енергії',
-                 'electricity': r'(\s[1-9]\s\w+,\w+|\w+,\w+)\nБорг станом',
-                 'gen_total_price': r'Всього нараховано за місяць: (.*?)\nПеня:'}
+                 'water': r'(\s[1-9]\s\w+,\w+|\w+,\w+|\w+)\nСпоживання електричної енергії',
+                 'electricity': r'(\s[1-9]\s\w+,\w+|\w+,\w+)\nБорг станом'}
     for name in gen_names.keys():
         maintenance_str = re.search(gen_names.get(name), pdf_text).group(1)
         gen_names[name] = ''.join(maintenance_str.split(" ")).replace(',', '.')

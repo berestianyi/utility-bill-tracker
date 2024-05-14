@@ -54,4 +54,4 @@ class UploadFileBillForm(forms.ModelForm):
 
     class Meta(object):
         model = Bill
-        fields = ['bill_file']
+        fields = ['file']

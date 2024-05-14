@@ -2,6 +2,7 @@ from decimal import Decimal
 
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.core.files.storage import default_storage
 
 from bills.forms import BillsForm, UploadFileBillForm
 from bills.models import BillType, Bill
@@ -27,27 +28,43 @@ def add_bill(request, building_slug):
 
 def add_file_bill(request, building_slug):
     building = Building.objects.get(slug=building_slug)
-    # bills = Bill.objects.filter(name__bill=)
     if request.method == 'POST':
         form = UploadFileBillForm(request.POST, request.FILES)
+        for field in form:
+            print("Field Error:", field.name, field.errors)
         if form.is_valid():
-            uploaded_file = request.FILES['bill_file']
+            uploaded_file = request.FILES['file']
             text_from_pdf = utils.pdf_reader(uploaded_file)
             general_info_dict: dict = utils.general_bill_info(text_from_pdf)
             if utils.is_heat_bill(text_from_pdf):
                 heat_total_price_dict: str = utils.heat_total_price(text_from_pdf)
+                bill_type = BillType.objects.get(slug='heating')
+                new_bill = Bill(
+                        building=building,
+                        name=bill_type,
+                        bill_sum=Decimal(heat_total_price_dict),
+                        month_paid=general_info_dict.get('month_paid')
+                    )
+                new_bill.save()
             else:
                 communal_services_dict: dict = utils.communal_services_extract(text_from_pdf)
+                for key, value in communal_services_dict.items():
+                    bill_type = BillType.objects.get(slug=key)
+                    new_bill = Bill(
+                        building=building,
+                        name=bill_type,
+                        bill_sum=Decimal(value),
+                        month_paid=general_info_dict.get('month_paid')
+                    )
+                    new_bill.save()
 
-            new_bill = form.save(commit=False)
-            new_bill.building = building
-            new_bill.name = new_bill.name
             return redirect('buildings:building', building_slug)
         else:
             print("form is not valid")
+            return redirect('buildings:building', building_slug)
     else:
-        form = BillsForm()
-        return render(request, 'bills/add_bill.html', {'form': form})
+        form = UploadFileBillForm()
+        return render(request, 'bills/add_file_bill.html', {'file_form': form})
 
 
 def add_input(request):

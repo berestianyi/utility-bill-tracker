@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 
-from bills.forms import BillsForm
+from bills.forms import BillsForm, UploadFileBillForm
 from bills.models import Bill, BillType
 from buildings.forms import BuildingForm
 from buildings.models import Building
@@ -10,12 +10,17 @@ from buildings.utils import BuildingDataMixin
 
 def index(request):
     form = BillsForm()
+    file_form = UploadFileBillForm()
 
     if request.user.is_authenticated:
         buildings = Building.objects.filter(user=request.user)
     else:
         buildings = []
-    return render(request, 'buildings/index.html', {'buildings': buildings, 'form': form})
+    return render(request, 'buildings/index.html', {
+        'buildings': buildings,
+        'form': form,
+        'file_form': file_form
+    })
 
 
 def add_building(request):
