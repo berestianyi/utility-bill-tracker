@@ -1,4 +1,5 @@
 from datetime import time
+from decimal import Decimal
 
 from colorfield.fields import ColorField
 from django.db import models
@@ -107,7 +108,7 @@ class Bill(models.Model):
         max_digits=20, decimal_places=3, null=True, blank=True
     )
     tariff = models.DecimalField(
-        max_digits=20, decimal_places=3, default=1, null=True, blank=True
+        max_digits=20, decimal_places=3, null=True, blank=True
     )
     month_paid = models.DateField(null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now, blank=True)
@@ -124,6 +125,10 @@ class Bill(models.Model):
         strtime = "".join(str(time()).split("."))
         string = "%s-%s" % (strtime[7:], self.name)
         self.slug = slugify(string)
+        if not self.tariff:
+            self.tariff = self.name.tariff
+        if not self.bill_sum:
+            self.bill_sum = Decimal(self.amount) * Decimal(self.name.tariff)
         super(Bill, self).save()
 
     def str_time(self):
