@@ -8,6 +8,8 @@ exclude = '''
         | \.env
         | build
         | migrations
+        | user
+        | form
     )/
 )
 '''
