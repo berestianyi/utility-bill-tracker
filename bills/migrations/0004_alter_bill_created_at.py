@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('bills', '0003_alter_billtype_slug'),
+        ("bills", "0003_alter_billtype_slug"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='bill',
-            name='created_at',
-            field=models.DateTimeField(blank=True, default='23.04.2024'),
+            model_name="bill",
+            name="created_at",
+            field=models.DateTimeField(blank=True, default="23.04.2024"),
         ),
     ]

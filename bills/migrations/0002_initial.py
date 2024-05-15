@@ -9,19 +9,23 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('bills', '0001_initial'),
-        ('buildings', '0001_initial'),
+        ("bills", "0001_initial"),
+        ("buildings", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='bill',
-            name='building',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='buildings.building'),
+            model_name="bill",
+            name="building",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="buildings.building"
+            ),
         ),
         migrations.AddField(
-            model_name='bill',
-            name='name',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='bills.billtype'),
+            model_name="bill",
+            name="name",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="bills.billtype"
+            ),
         ),
     ]

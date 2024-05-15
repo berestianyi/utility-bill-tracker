@@ -14,7 +14,7 @@ def chart(request):
         {"label": "SEP", "y": 65530},
         {"label": "OCT", "y": 65300},
         {"label": "NOV", "y": 65340},
-        {"label": "DEC", "y": 64530}
+        {"label": "DEC", "y": 64530},
     ]
     user_data_2021 = [
         {"label": "JAN", "y": 65100},
@@ -28,6 +28,10 @@ def chart(request):
         {"label": "SEP", "y": 71050},
         {"label": "OCT", "y": 71500},
         {"label": "NOV", "y": 72110},
-        {"label": "DEC", "y": 71820}
+        {"label": "DEC", "y": 71820},
     ]
-    return render(request, 'charts/building_chart.html', {"user_data_2021": user_data_2021, "user_data_2020": user_data_2020})
+    return render(
+        request,
+        "charts/building_chart.html",
+        {"user_data_2021": user_data_2021, "user_data_2020": user_data_2020},
+    )

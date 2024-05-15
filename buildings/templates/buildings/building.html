@@ -34,15 +34,69 @@
                             <div class="input-group mb-2">
                                 <h6 style="color: #ececec">Total loss: {{ total_sum }}</h6>
                             </div>
+                            <div class="input-group mb-2">
+                                <h6 style="color: #ececec">Total year loss: {{ total_sum }}</h6>
+                            </div>
+                            <div class="input-group mb-2">
+                                <h6 style="color: #ececec">This month loss: {{ total_sum }}</h6>
+                            </div>
                         </div>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            Add new bill
-                        </button>
+                        <div class="mb-3">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBill">
+                                Add new bill
+                            </button>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBillFile">
+                                Add new bill as a file
+                            </button>
+                        </div>
+                        <div class="mb-3">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#yearChart">
+                                View year statistic
+                            </button>
+                            <button type="button" class="btn btn-primary">
+                                Change category
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="alert border-primary" role="alert" style="background-color: #2d2a60">
+                        <p class="text-primary">A simple primary alert—check it out!</p>
+                    </div>
+                    <div class="alert border-primary" role="alert" style="background-color: #5b1070">
+                        <p class="text-primary">A simple primary alert—check it out!</p>
+                    </div>
+                    <div class="alert border-secondary" role="alert" style="background-color: #343434">
+                      <p class="text-secondary">A simple primary alert—check it out!</p>
+                    </div>
+                    <div class="alert border-success" role="alert" style="background-color: #183d22">
+                      <p class="text-success">A simple primary alert—check it out!</p>
+                    </div>
+                    <div class="alert border-success" role="alert" style="background-color: #072302">
+                      <p class="text-success">A simple primary alert—check it out!</p>
+                    </div>
+                    <div class="alert border-danger" role="alert" style="background-color: #421717">
+                      <p class="text-danger">A simple primary alert—check it out!</p>
+                    </div>
+                    <div class="alert border-danger" role="alert" style="background-color: #56135b">
+                      <p class="text-danger">A simple primary alert—check it out!</p>
+                    </div>
+                    <div class="alert border-warning" role="alert" style="background-color: #705605">
+                      <p class="text-warning">A simple primary alert—check it out!</p>
+                    </div>
+                    <div class="alert border-warning" role="alert" style="background-color: #623307">
+                      <p class="text-warning">A simple primary alert—check it out!</p>
+                    </div>
+                    <div class="alert border-info" role="alert" style="background-color: #154d47">
+                      <p class="text-info">A simple primary alert—check it out!</p>
+                    </div>
+                    <div class="alert border-light" role="alert" style="background-color: #777777">
+                      <p class="text-light">A simple primary alert—check it out!</p>
                     </div>
                 </div>
             </div>
             <div class="border-light w-50" style="background-color: #1b1d1e; min-width: 500px">
-                {% include 'charts/building_chart.html' %}
+{#                {% include 'charts/building_chart.html' %}#}
 
                 <div class="btn-group mb-3" role="group" aria-label="Button group with nested dropdown">
                     <button type="button" class="btn btn-primary">Sort by:</button>
@@ -67,12 +121,12 @@
                                 </div>
                         {% endif %}
                     {% endwith %}
-                    <div class="card text-light border-light mb-2"
-                         style="min-width: 18rem; max-height: 50px ; background-color: #1b1d1e; color: #ececec;">
-                        <div class="card-body text-light border-light d-flex justify-content-between">
+                    <div class="card text-{{ bill.name.bootstrap_color }} border-{{ bill.name.bootstrap_color }} mb-2"
+                         style="min-width: 18rem; max-height: 50px ; background-color: {{ bill.name.color }};">
+                        <div class="card-body text-{{ bill.name.bootstrap_color }} border-{{ bill.name.bootstrap_color }} d-flex justify-content-between">
                             <p>{{ bill.name }} <span
-                                    class="badge text-bg-secondary">{{ bill.str_time }}</span></p>
-                            <p class="text-light">{{ bill.bill_sum }} UAN</p>
+                                    class="badge text-bg-{{ bill.name.bootstrap_color }}">{{ bill.str_time }}</span></p>
+                            <p class="text-{{ bill.name.bootstrap_color }}">{{ bill.bill_sum }} UAN</p>
                         </div>
                     </div>
                 {% endfor %}
@@ -103,9 +157,19 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addBill" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             {% include 'bills/add_bill.html' %}
+        </div>
+    </div>
+    <div class="modal fade" id="addBillFile" tabindex="-1" aria-labelledby="AddFileBillLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            {% include 'bills/add_file_bill.html' %}
+        </div>
+    </div>
+    <div class="modal fade" id="yearChart" tabindex="-1" aria-labelledby="yearChartLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            {% include 'bills/add_file_bill.html' %}
         </div>
     </div>
 {% endblock %}

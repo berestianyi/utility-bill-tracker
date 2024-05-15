@@ -8,29 +8,58 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Bill',
+            name="Bill",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('amount', models.DecimalField(decimal_places=3, max_digits=20)),
-                ('tariff', models.DecimalField(decimal_places=3, default=1, max_digits=20)),
-                ('month_paid', models.DateField(blank=True, null=True)),
-                ('created_at', models.DateTimeField(blank=True, default=django.utils.timezone.now)),
-                ('bill_sum', models.DecimalField(blank=True, decimal_places=2, max_digits=20, null=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("amount", models.DecimalField(decimal_places=3, max_digits=20)),
+                (
+                    "tariff",
+                    models.DecimalField(decimal_places=3, default=1, max_digits=20),
+                ),
+                ("month_paid", models.DateField(blank=True, null=True)),
+                (
+                    "created_at",
+                    models.DateTimeField(blank=True, default=django.utils.timezone.now),
+                ),
+                (
+                    "bill_sum",
+                    models.DecimalField(
+                        blank=True, decimal_places=2, max_digits=20, null=True
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='BillType',
+            name="BillType",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('type_name', models.CharField(max_length=50)),
-                ('tariff', models.DecimalField(decimal_places=3, default=1, max_digits=20)),
-                ('measure_unit', models.CharField(default='watt-hour', max_length=10)),
-                ('slug', models.SlugField(blank=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("type_name", models.CharField(max_length=50)),
+                (
+                    "tariff",
+                    models.DecimalField(decimal_places=3, default=1, max_digits=20),
+                ),
+                ("measure_unit", models.CharField(default="watt-hour", max_length=10)),
+                ("slug", models.SlugField(blank=True)),
             ],
         ),
     ]

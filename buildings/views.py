@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView
+from django.shortcuts import redirect, render
+from django.views.generic import ListView
 
 from bills.forms import BillsForm, UploadFileBillForm
 from bills.models import Bill, BillType
@@ -16,67 +16,60 @@ def index(request):
         buildings = Building.objects.filter(user=request.user)
     else:
         buildings = []
-    return render(request, 'buildings/index.html', {
-        'buildings': buildings,
-        'form': form,
-        'file_form': file_form
-    })
+    return render(
+        request,
+        "buildings/index.html",
+        {"buildings": buildings, "form": form, "file_form": file_form},
+    )
 
 
 def add_building(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = BuildingForm(request.POST)
         if form.is_valid():
             new_building = form.save(commit=False)
             new_building.user = request.user
             new_building.save()
             form.save_m2m()
-            return redirect('buildings:index')
+            return redirect("buildings:index")
     else:
         form = BuildingForm()
-    return render(request, 'buildings/add_building.html', {'form': form})
+    return render(request, "buildings/add_building.html", {"form": form})
 
 
 class BuildingListView(BuildingDataMixin, ListView):
     model = Bill
-    context_object_name = 'bills'
+    context_object_name = "bills"
 
     def get_queryset(self):
-        building_slug = self.kwargs['building_slug']
-        return Bill.objects.filter(building__slug=building_slug).order_by('-created_at')
+        building_slug = self.kwargs["building_slug"]
+        return Bill.objects.filter(building__slug=building_slug).order_by(
+            "-created_at"
+        )
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        building_slug = self.kwargs['building_slug']
-        building = Building.objects.get(slug=building_slug)
-        context['select_name'] = 'Utility bill type'
-        context['building'] = building
-        context['bill_types'] = BillType.objects.all()
-        context['total_sum'] = Bill.total_sum(building_slug=building_slug)
-        context['form'] = BillsForm()
+        context = self.get_common_context(**kwargs)
+        context["select_name"] = "Utility bill type"
         return context
 
 
 class BillTypeListView(BuildingDataMixin, ListView):
     model = Bill
-    context_object_name = 'bills'
+    context_object_name = "bills"
 
     def get_queryset(self):
-        bill_type = BillType.objects.get(slug=self.kwargs['bill_type_slug'])
-        bills = Bill.objects.filter(building__slug=self.kwargs['building_slug'])
+        bill_type = BillType.objects.get(slug=self.kwargs["bill_type_slug"])
+        bills = Bill.objects.filter(
+            building__slug=self.kwargs["building_slug"]
+        )
         return bills.filter(name=bill_type.id)
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        building_slug = self.kwargs['building_slug']
-        building = Building.objects.get(slug=building_slug)
-        context['select_name'] = BillType.objects.get(slug=self.kwargs['bill_type_slug']).type_name
-        context['building'] = building
-        context['bill_types'] = BillType.objects.all()
-        context['total_sum'] = Bill.total_sum(building_slug=building_slug)
-        context['form'] = BillsForm()
+        context = self.get_common_context(**kwargs)
+        context["select_name"] = BillType.objects.get(
+            slug=self.kwargs["bill_type_slug"]
+        ).type_name
         return context
-
 
 
 # def building_page(request, building_key):

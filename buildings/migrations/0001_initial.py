@@ -10,23 +10,45 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('bills', '0001_initial'),
+        ("bills", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Building',
+            name="Building",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=50)),
-                ('address', models.CharField(max_length=50)),
-                ('home_mark', models.BooleanField(default=False)),
-                ('description', models.CharField(default='', max_length=200)),
-                ('currency', models.CharField(default='UAN', max_length=10)),
-                ('slug', models.SlugField(blank=True)),
-                ('bill_sub_category', models.ManyToManyField(blank=True, related_name='bill_sub_category', to='bills.billtype')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='user', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=50)),
+                ("address", models.CharField(max_length=50)),
+                ("home_mark", models.BooleanField(default=False)),
+                ("description", models.CharField(default="", max_length=200)),
+                ("currency", models.CharField(default="UAN", max_length=10)),
+                ("slug", models.SlugField(blank=True)),
+                (
+                    "bill_sub_category",
+                    models.ManyToManyField(
+                        blank=True,
+                        related_name="bill_sub_category",
+                        to="bills.billtype",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="user",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

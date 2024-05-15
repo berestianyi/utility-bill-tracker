@@ -6,18 +6,20 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('bills', '0003_alter_billtype_slug'),
-        ('buildings', '0002_alter_building_slug'),
+        ("bills", "0003_alter_billtype_slug"),
+        ("buildings", "0002_alter_building_slug"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='building',
-            name='bill_sub_category',
+            model_name="building",
+            name="bill_sub_category",
         ),
         migrations.AddField(
-            model_name='building',
-            name='bill_type',
-            field=models.ManyToManyField(blank=True, related_name='bill_type', to='bills.billtype'),
+            model_name="building",
+            name="bill_type",
+            field=models.ManyToManyField(
+                blank=True, related_name="bill_type", to="bills.billtype"
+            ),
         ),
     ]
