@@ -14,6 +14,7 @@ class BuildingDataMixin:
     extra_context = {}
 
     def __init__(self):
+        self.kwargs = None
         if self.title_page:
             self.extra_context["title"] = self.title_page
 
@@ -35,7 +36,7 @@ class BuildingDataMixin:
         context["building"] = building
         context["bill_types"] = BillType.objects.all()
         context["total_sum"] = Bill.total_sum(
-            building_slug=self.kwargs["building_slug"]
+            building_slug=self.get_building().slug
         )
         context["form"] = BillsForm()
         context["file_form"] = UploadFileBillForm()
