@@ -145,6 +145,20 @@ files = [
 Django = ">=3.2"
 
 [[package]]
+name = "django-colorfield"
+version = "0.11.0"
+description = "color field for django models with a nice color-picker in the admin."
+optional = false
+python-versions = "*"
+files = [
+    {file = "django-colorfield-0.11.0.tar.gz", hash = "sha256:05c38c8eb2a94938b810a19b2011846391a4ce71d1c92e88a35974fbcc8fc62e"},
+    {file = "django_colorfield-0.11.0-py3-none-any.whl", hash = "sha256:460f40e6123b6ae0fb51a4eb86fc258fcdc0ea28f75102b685e8209b1eae9ec3"},
+]
+
+[package.dependencies]
+Pillow = ">=9.0.0"
+
+[[package]]
 name = "filelock"
 version = "3.14.0"
 description = "A platform independent file lock."
@@ -633,4 +647,4 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "6530e81e3841d4d7711a66886f9e9b421d5c599ed27b47b97b2e1efd4f16007c"
+content-hash = "a25ddd9fd8c9a4f1c079ca3ed974a6efe5ad73ef93d00f0b574e35b6bb369a94"
