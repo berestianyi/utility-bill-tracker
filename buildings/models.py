@@ -1,3 +1,6 @@
+import hashlib
+from datetime import datetime
+
 from django.db import models
 from django.utils.text import slugify
 
@@ -23,7 +26,10 @@ class Building(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.name)
+            current_time = datetime.now().strftime('%Y%m%d%H%M%S')
+            hash_object = hashlib.sha256(current_time.encode())
+            hash_hex = hash_object.hexdigest()[:8]
+            self.slug = slugify(f"{current_time}-{hash_hex}")
         super().save(*args, **kwargs)
 
     def __str__(self):
