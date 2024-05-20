@@ -18,4 +18,14 @@ urlpatterns = [
         views.BillTypeListView.as_view(),
         name="bill_type",
     ),
+    path(
+        "building/<slug:building_slug>/change",
+        views.change_building,
+        name="change_building",
+    ),
+    path(
+        "building/<slug:building_slug>/htmx_form_change",
+        views.htmx_form_change,
+        name="htmx_form_change",
+    )
 ]
