@@ -1,5 +1,6 @@
 from bills.forms import BillsForm, UploadFileBillForm
 from bills.models import Bill, BillType
+from buildings.forms import BuildingForm
 from buildings.models import Building
 
 
@@ -34,6 +35,7 @@ class BuildingDataMixin:
         context = super().get_context_data(**kwargs)
         building = self.get_building()
         context["building"] = building
+        context["change_form"] = BuildingForm(instance=self.get_building())
         context["bill_types"] = BillType.objects.all()
         context["total_sum"] = Bill.total_sum(
             building_slug=self.get_building().slug
