@@ -1,9 +1,22 @@
-<form action="{% url 'bills:add_file_bill' building.slug %}" method="POST" enctype="multipart/form-data" class="modal-content" style="background-color: #1b1d1e; color: #ececec">
+<form action="{% url 'bills:add_file_bill' building.slug %}" method="POST" enctype="multipart/form-data"
+      class="modal-content" style="background-color: #1b1d1e; color: #ececec">
     {% csrf_token %}
     <div class="modal-header" style="background-color: #1b1d1e; color: #ececec">
         <h1 class="modal-title fs-5" id="eAddFileBillLabel">{{ building.name }}</h1>
     </div>
     <div class="modal-body">
+        {% if file_form.non_field_errors %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <div class="errorlist">
+                <ul>
+                    {% for error in file_form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
         <div style="background-color: #1b1d1e; color: #ececec">
             <div class="alert alert-warning" role="alert">
                 ATTENTION! This function is only available for residents of "ЖК ФАЙНА ТАУН"
