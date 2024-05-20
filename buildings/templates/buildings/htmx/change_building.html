@@ -1,0 +1,30 @@
+<div id="buildingCard" class="card-body">
+    <form action="{% url 'buildings:change_building' building.slug %}" method="post" class="card-body">
+        {% csrf_token %}
+        <div class="form-floating border-light mb-3" style="color: #ececec">
+            {{ change_form.name }}
+            <label for="floatingInput">Write name of building</label>
+        </div>
+        <div class="form-floating border-light mb-3" style="color: #ececec">
+            {{ change_form.address }}
+            <label for="floatingInput">Write building address</label>
+        </div>
+        <hr style="color: #ececec"/>
+        <p class="card-text" style="color: #ececec">You can write a description for your building</p>
+        <div class="form-floating mb-3" style="color: #ececec">
+            {{ change_form.description }}
+            <label for="TextareaDescription">Description</label>
+        </div>
+        <div class="input-group mb-3" style="background: #1b1d1e;color: #ececec; width: 160px">
+            <div class="input-group-text" style="background: #1b1d1e;color: #ececec">
+                {{ change_form.home_mark }}
+            </div>
+            <input type="text" class="form-control" value="Home mark" aria-label="Text input with checkbox"
+                   readonly style="background: #1b1d1e;color: #ececec">
+        </div>
+        <h5 class="card-title" style="color: #ececec">Make sure you've written everything correct</h5>
+        <p class="card-text" style="color: #ececec">And don't worry, you'll be able to change anything in
+            the settings.</p>
+        <button type="submit" class="btn btn-primary" style="color: #ececec">Add building</button>
+    </form>
+</div>
