@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load date_filter %}
+{% load static %}
+
+
+{% block title %}Statistic{% endblock %}
+{% block head %} 
+    {% include 'charts/include/building_chart_script.html' %}
+{% endblock %}
+{% block body %}
+    <div class="container-fluid">
+        <div class="d-flex row justify-content-center" style="margin-top: 6rem">
+            <div style="background-color: #1b1d1e; width: 500px">
+                <select class="form-select mb-3" aria-label="select menu" style="background-color: #1b1d1e; color: #ececec">
+                  <option selected>Compair property by year</option>
+                  <option value="1">Compair properties by years</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+                <div class="card border-light" style="background-color: #1b1d1e; color: #ececec">
+                  <div class="card-body" >
+                    This is some text within a card body.
+                      <div class="row mt-1 mb-1">
+                          <div class="col d-flex align-middle">
+                            <p class="ms-2 mt-1">Select:</p>
+                          </div>
+                          <div class="col">
+                              <select class=" form-select form-select-sm me-3" aria-label="Small select example">
+                                  <option selected>Year</option>
+                                  <option value="1">2021</option>
+                                  <option value="2">2022</option>
+                                  <option value="3">2023</option>
+                              </select>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+            </div>
+            <div class="border-light w-50" style="background-color: #1b1d1e; min-width: 500px">
+                {% include 'charts/building_chart.html' %}
+            </div>
+        </div>
+    
+    </div>
+
+{% endblock %}

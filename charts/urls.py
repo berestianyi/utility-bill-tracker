@@ -6,6 +6,5 @@ from . import views
 app_name = "charts"
 
 urlpatterns = [
-    path("chart/", views.chart, name="chart"),
-    path("charts/", views.chart, name="33"),
+    path("charts/", views.chart, name="statistic"),
 ]

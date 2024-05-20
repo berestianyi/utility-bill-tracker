@@ -1,0 +1,23 @@
+<script>
+  window.onload = function () {
+    var chart = new CanvasJS.Chart("chartContainerProcent",{
+      exportEnabled: true,
+      animationEnabled: true,
+      theme: "dark2",
+      title: {
+        text: "Developer Work Week"
+      },
+      subtitles: [{
+        text: "Median hours/week"
+      }],
+      data: [{
+        type: "doughnut",
+        startAngle: -90,
+        indexLabel: "{name} ({y})",
+        yValueFormatString: "#,##0.0#\"%\"",
+        dataPoints: {{ developer_work_week_data|safe }}
+      }]
+    });
+    chart.render();
+  }
+</script> 
