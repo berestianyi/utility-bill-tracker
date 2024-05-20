@@ -34,7 +34,7 @@ def add_file_bill(request, building_slug):
         if form.is_valid():
             uploaded_file = request.FILES["file"]
             text_from_pdf = utils.pdf_reader(uploaded_file)
-            general_info_dict: dict = utils.general_bill_info(text_from_pdf)
+            general_info_dict = utils.general_bill_info(text_from_pdf)
             if utils.is_heat_bill(text_from_pdf):
                 heat_total_price_dict: str = utils.heat_total_price(
                     text_from_pdf
@@ -60,11 +60,10 @@ def add_file_bill(request, building_slug):
                         month_paid=general_info_dict.get("month_paid"),
                     )
                     new_bill.save()
-
-            return redirect("buildings:building", building_slug)
+                return redirect("buildings:building", building_slug)
         else:
             print("form is not valid")
-            return redirect("buildings:building", building_slug)
+            return render(request, "bills/add_file_bill.html", {"file_form": form})
     else:
         form = UploadFileBillForm()
         return render(request, "bills/add_file_bill.html", {"file_form": form})
