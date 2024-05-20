@@ -1,5 +1,6 @@
 from bootstrap_datepicker_plus.widgets import MonthPickerInput
 from django import forms
+from django.core.validators import RegexValidator
 
 from bills.models import Bill, BillType
 
@@ -20,6 +21,13 @@ class BillsForm(forms.ModelForm):
                 "style": "background-color: #1b1d1e; color: #ececec;",
             }
         ),
+        validators=[
+            RegexValidator(
+                regex=r'^[a-zA-Z]+$',
+                message='You should choose bill',
+                code='invalid_name'
+            )
+        ]
     )
 
     amount = forms.DecimalField(
@@ -30,6 +38,8 @@ class BillsForm(forms.ModelForm):
                 "aria-label": "Amount",
                 "style": "color: #ececec; background-color: #1b1d1e;",
                 "id": "amount",
+                "type": "number",
+                "min": "0"
             }
         )
     )
