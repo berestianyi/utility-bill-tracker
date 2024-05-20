@@ -9,16 +9,16 @@
     <div class="container-fluid">
         <div class="d-flex row justify-content-center" style="margin-top: 6rem">
             <div style=" width: 500px">
-                <div class="card border-light w-25 mb-3"
-                     style="background-color: #1b1d1e; min-width: 480px;">
-                    <div class="card-header border-light" style="color: #ececec">
+                <div class=" ms-1 me-1 mb-3" style="color: #ececec">
                         <h5>{{ building.name }}
                             {% if building.home_mark is True %}
                                 <span class="badge text-bg-info">Home</span>
                             {% endif %}
                         </h5>
                     </div>
-                    <div class="card-body">
+                <div class="card border-light w-25 mb-3"
+                     style="background-color: #1b1d1e; min-width: 480px;">
+                    <div id="buildingCard" class="card-body">
                         <div>
                             <div class="input-group mb-2">
                                 <h6 style="color: #ececec">Address: {{ building.address }}</h6>
@@ -50,8 +50,8 @@
                             </button>
                         </div>
                         <div class="mb-3">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#yearChart">
-                                View year statistic
+                            <button type="button" class="btn btn-primary" hx-get="{% url 'buildings:htmx_form_change' building.slug %}" hx-target="#buildingCard">
+                                Change property
                             </button>
                             <button type="button" class="btn btn-primary">
                                 Change category
